@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: 'Times New Roman', serif; /* Font style */
+            background-image: url("{{ url_for('static', filename='3409297.jpg') }}"); /* Set background image */
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the background */
+            background-attachment: fixed; /* Fixed background while scrolling */
+            text-align: center; /* Center text */
+            padding: 20px;
+            color: white; /* White text color */
+        }
+
+        /* Styling for the result container */
+        .container {
+            background: rgba(90, 100, 235, 0.3); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* Adding shadow */
+            display: inline-block;
+            margin-top: 60px;
+            width: 400px;
+            height: 400px;
+        }
+
+        /* Heading style */
+        h2 {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Paragraph styling */
+        p {
+            font-size: 22px;
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        /* Styling for highlighted text (filename & gender) */
+        .highlight {
+            color: orange;
+            font-size: 24px;
+        }
+
+        /* Styling for buttons */
+        .back-button {
+            background-color: #ff9800; /* Orange button color */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+        }
+
+        /* Button hover effect */
+        .back-button:hover {
+            background-color: #e68900;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Fingerprint Gender Prediction</h2>
+
+        <!-- Display the filename if available -->
+        {% if filename %}
+            <p><strong>Filename:</strong> <span class="highlight">{{ filename }}</span></p>
+        {% else %}
+            <p>No filename available.</p>
+        {% endif %}
+
+        <!-- Display the predicted gender -->
+        <p>Predicted Gender: <span class="highlight">{{ gender }}</span></p>
+        
+        <!-- Buttons for viewing history and uploading another image -->
+        <a href="{{ url_for('results') }}" class="back-button" style="margin-right: 20px;">View History</a>
+        <a href="{{ url_for('home') }}" class="back-button">Upload Another Image</a>
+        
+    </div>
+
+</body>
+</html>

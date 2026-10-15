@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+    <style>
+        /* Styling for the entire page */
+        body {
+            font-family: 'Times New Roman', serif; /* Sets font style */
+            background-image: url("{{ url_for('static', filename='3409297.jpg') }}"); /* Sets background image */
+            background-size: cover; /* Ensures the image covers the full background */
+            background-position: center;
+            background-attachment: fixed;
+            color: white; /* Text color */
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Container for the history table */
+        .container {
+            width: 50%;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        /* Styling for the table */
+        table {
+            width: 100%; /* Full width */
+            border-collapse: collapse; /* Removes double borders */
+            margin-top: 20px;
+        }
+
+        /* Table header and data cell styling */
+        th, td {
+            border: 1px solid white; /* White border for cells */
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Background color for table headers */
+        th {
+            background-color: orange;
+        }
+
+        /* Back to home button styling */
+        .back-button {
+            background-color: #ff9800;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Prediction History</h2>
+
+        <!-- Check if there are records in the history list -->
+        {% if history|length > 0 %}
+            <table>
+                <tr>
+                    <th>Filename</th>
+                    <th>Predicted Gender</th>
+                </tr>
+                <!-- Loop through the history records and display them in table rows -->
+                {% for item in history %}
+                <tr>
+                    <td>{{ item[0] }}</td>  <!-- Display the filename -->
+                    <td>{{ item[1] }}</td>  <!-- Display the predicted gender -->
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No history available.</p> <!-- Message if no predictions exist -->
+        {% endif %}
+
+        <!-- Button to return to the home page -->
+        <a href="{{ url_for('home') }}" class="back-button">Back to Home</a>
+    </div>
+
+</body>
+</html>

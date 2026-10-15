@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fingerprint Gender Detection</title>
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: 'Times New Roman', serif; /* Set font style */
+            background-image: url("{{ url_for('static', filename='3409297.jpg') }}"); /* Background image */
+            background-size: cover; /* Cover full screen */
+            background-position: center; /* Center background */
+            background-attachment: fixed; /* Fixed background */
+            text-align: center; /* Center align all text */
+            padding: 20px;
+            color: white; /* White text color */
+        }
+
+        /* Styling for the page heading */
+        h1 {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Styling for the upload form */
+        form {
+            background: rgba(90, 100, 235, 0.3); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* Adding shadow */
+            display: inline-block;
+            margin-top: 30px;
+            width: 400px;
+            height: 290px; /* Increased height to accommodate error message */
+        }
+
+        /* Hide default file input */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Custom file upload button */
+        .custom-file-upload {
+            background-color: #ff9800; /* Orange button */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            display: inline-block;
+            width: 60%;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Hover effect for custom file button */
+        .custom-file-upload:hover {
+            background-color: #e68900;
+        }
+
+        /* Display selected file name */
+        #file-name {
+            display: block;
+            margin-top: 15px;
+            font-size: 18px;
+            color: #ddd;
+            font-weight: bold;
+        }
+
+        /* Error message styling */
+        #error-message {
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+            display: none; /* Initially hidden */
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Styling for the upload button */
+        button {
+            background-color: #007BFF; /* Blue button */
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 60%;
+            margin-top: 45px;
+        }
+
+        /* Hover effect for the button */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling for prediction result text */
+        p {
+            font-size: 28px;
+            color: white;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page title -->
+    <h1>Upload a Fingerprint Image for Gender Detection</h1>
+    
+    <!-- Upload form -->
+    <form action="/predict" method="POST" enctype="multipart/form-data" id="upload-form">
+        <!-- Custom file input -->
+        <label for="file" class="custom-file-upload">Choose File</label>
+        <input type="file" name="file" id="file">
+        <span id="file-name">No file chosen</span>
+
+        <!-- Error message for validation -->
+        <div id="error-message">Please select a file before uploading.</div> 
+
+        <!-- Upload button -->
+        <button type="submit" id="upload-btn">Upload</button>
+    </form>
+
+    <script>
+        // When a user selects a file, update the displayed file name.
+        // Hide any previously shown error message.
+        document.getElementById('file').addEventListener('change', function() {
+            let fileName = this.files[0] ? this.files[0].name : "No file chosen";
+            document.getElementById('file-name').textContent = fileName;
+            document.getElementById('error-message').style.display = "none"; // Hide error message when file is selected
+        });
+
+        // Validate file selection and format before form submission
+        document.getElementById("upload-form").addEventListener("submit", function(event) {
+            let fileInput = document.getElementById('file');
+            let file = fileInput.files[0];
+            let errorMessage = document.getElementById("error-message");
+
+            // If no file is selected, show an error message and prevent submission
+            if (!file) {
+                errorMessage.textContent = "Please select a file before uploading.";
+                errorMessage.style.display = "block"; // Show error message
+                event.preventDefault(); // Prevent form submission
+                return;
+            }
+
+            // Extract the file extension and check if it is a valid image format
+            let allowedExtensions = ["jpg", "jpeg", "png", "bmp"];
+            let fileExtension = file.name.split('.').pop().toLowerCase();
+
+            // If the file format is invalid, show an error message
+            if (!allowedExtensions.includes(fileExtension)) {
+                errorMessage.textContent = "Invalid file type! Please upload a JPG, PNG, or BMP image.";
+                errorMessage.style.display = "block";
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+</body>
+</html>
