@@ -37,10 +37,10 @@ def loading_data(path, train=True):
     return data
 
 # Paths to datasets
-Real_path = r"C:\Users\Bhagyashree\Desktop\New folder\dataset\SOCOFing\Real"
-Easy_path = r"C:\Users\Bhagyashree\Desktop\New folder\dataset\SOCOFing\Altered\Altered-Easy"
-Medium_path = r"C:\Users\Bhagyashree\Desktop\New folder\dataset\SOCOFing\Altered\Altered-Medium"
-Hard_path = r"C:\Users\Bhagyashree\Desktop\New folder\dataset\SOCOFing\Altered\Altered-Hard"
+Real_path = 
+Easy_path = 
+Medium_path = 
+Hard_path =
 
 # Load data
 Easy_data = loading_data(Easy_path, train=True)
@@ -108,7 +108,7 @@ model.summary()
 
 epochs = 30 # Turn epochs to 30 to get 0.9967 accuracy
 batch_size = 86
-model_path = r"C:\Users\Bhagyashree\Desktop\New folder\Gender_detection\model\fingerprint_gender_model.h5"
+model_path = r""
 
 
 
