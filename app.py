@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = "shubham"  # Required for flash messages
 
 # Load the trained gender detection model
-MODEL_PATH = r"C:\Users\Bhagyashree\Desktop\New folder\Gender_detection\model\fingerprint_gender_model.h5"
+MODEL_PATH = r""
 model = load_model(MODEL_PATH)
 
 # Database setup
